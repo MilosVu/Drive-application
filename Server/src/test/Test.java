@@ -24,16 +24,17 @@ public class Test {
 //		User u1 = new User("MilosVu", "milos123");
 //		User u2 = new User("AnjaDj", "anja456");
 //		User u3 = new User("MarkoCAR", "marko789");
-//		Users users = new Users();
+		Users users = new Users();
 //		users.add(u1);
 //		users.add(u2);
 //		users.add(u3);
 //		
 //		users.store();
-//		ServiceImpl serviceImpl = new ServiceImpl();
-//		serviceImpl.load();
+		ServiceImpl serviceImpl = new ServiceImpl();
+		serviceImpl.load();
+		
 //	
-//		serviceImpl.preview();
+		serviceImpl.preview();
 //		if(serviceImpl.logIn("Milos1", "m")==null)
 //			System.out.println("ma");
 //		else {
@@ -55,7 +56,7 @@ public class Test {
 //		}
 		
 		
-		String s = "C:\\Users\\Milos\\eclipse-workspace\\Server\\src\\test\\proba.txt";
+//		String s = "C:\\Users\\Milos\\eclipse-workspace\\Server\\src\\test\\proba.txt";
 //		File f = new File(s+"\\dir1");
 //		f.mkdir();
 //		f = new File(s+"\\dir2");
@@ -82,7 +83,7 @@ public class Test {
 //		System.out.println(failName[0]);
 //		System.out.println(failName[failName.length - 1]+ ",");
 	
-		File f = new File("C:\\Users\\Milos\\eclipse-workspace\\Server\\src\\test\\dir1\\novooooo.txt");
+//		File f = new File("C:\\Users\\Milos\\eclipse-workspace\\Server\\Drive\\premium\\br");
 //		File out = new File("C:\\Users\\Milos\\eclipse-workspace\\Server\\src\\test\\dir1\\mmm.txt");
 //		try {
 //			Files.copy(f.toPath(), out.toPath());
@@ -90,7 +91,13 @@ public class Test {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		f.delete();
+//		f.delete();
+//		System.out.println(f.list().length);
+//		String s = "CA";
+//		String[] rs = s.split(",");
+//		System.out.println(rs[0]);
+//		File f = new File("C:\\Users\\Milos\\eclipse-workspace\\Server\\users");
+//		f.delete();
 	}
 		
 	

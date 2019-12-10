@@ -19,10 +19,9 @@ public class Server {
 			serviceImpl.load();
 			Socket socketForCommunication = null;
 			while(true) {
-				System.out.println("Cekam konekciju...");
+				System.out.println("Waiting...");
 				socketForCommunication = serverSocket.accept();
-				System.out.println("Prihvacena konekcija...");
-				
+				System.out.println("Connection accepted...");
 				ServerThreads newClient = new ServerThreads(socketForCommunication,serviceImpl);
 				clients.add(newClient);
 				
@@ -30,7 +29,7 @@ public class Server {
 			}
 			
 		} catch (IOException e) {
-			System.out.println("Greska prilikom pokretanja servera... " + e.getMessage());
+			System.out.println("Error while starting server... " + e.getMessage());
 		}
 		
 	}

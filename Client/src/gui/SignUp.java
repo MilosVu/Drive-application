@@ -24,6 +24,7 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 
 public class SignUp extends JFrame {
 
@@ -75,6 +76,9 @@ public class SignUp extends JFrame {
 	ServiceImpl serviceImpl = new ServiceImpl();
 	private JPasswordField txtPassword1;
 	private JPasswordField txtPassword2;
+	private JRadioButton rdbtnPremiumUser;
+	private JRadioButton rdbtnRegularUser;
+	private JButton btnSignUp;
 	
 	
 	/**
@@ -98,6 +102,9 @@ public class SignUp extends JFrame {
 		contentPane.add(getBtnNewButton());
 		contentPane.add(getTxtPassword1());
 		contentPane.add(getPasswordField_1());
+		contentPane.add(getRdbtnPremiumUser());
+		contentPane.add(getRdbtnRegularUser());
+		contentPane.add(getBtnSignUp());
 	}
 	private JLabel getLabel() {
 		if (label == null) {
@@ -149,27 +156,42 @@ public class SignUp extends JFrame {
 					String username = txtUsername.getText();
 					String password1 = txtPassword1.getText();
 					String password2 = txtPassword2.getText();
-					if(password1.equals(password2)) {
-						streamToServer.println(serviceImpl.registration(socketForCommunication, username, password1));
-						try {
-							response = streamFromServer.readLine();
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
-						if(response.equals("Username already taken")) {
-							JOptionPane.showMessageDialog(null, response);
-							
-						}
-						else {
-							JOptionPane.showMessageDialog(null, response);
-						}
-						}
-					else {
+
+					if(!rdbtnPremiumUser.isSelected() && !rdbtnRegularUser.isSelected()) {
+						JOptionPane.showMessageDialog(null, "Error, you haven't selected both type of account");
+						return;
+					}
+					
+					if(rdbtnPremiumUser.isSelected() && rdbtnRegularUser.isSelected()) {
+						JOptionPane.showMessageDialog(null, "Error, you have selected both regular and premium account");
+						return;
+					}
+					if(!password1.equals(password2)){
 						JOptionPane.showMessageDialog(null, "Password doesn't match");
 						txtUsername.setText(null);
 						txtPassword1.setText(null);
 						txtPassword2.setText(null);
+						return;
 					}
+					if(password1.equals(password2) && rdbtnPremiumUser.isSelected()) {
+						streamToServer.println(serviceImpl.registration(username, password1,"P"));
+					}
+					if(password1.equals(password2) && rdbtnRegularUser.isSelected()) {
+						streamToServer.println(serviceImpl.registration(username, password1,"R"));
+					}
+					try {
+							response = streamFromServer.readLine();
+					} catch (IOException e1) {
+							e1.printStackTrace();
+					}
+					if(response.equals("Username already taken")) {
+							JOptionPane.showMessageDialog(null, response);
+							
+					}
+					else {
+							JOptionPane.showMessageDialog(null, response);
+					}
+					
 				}
 			});
 			btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -190,5 +212,31 @@ public class SignUp extends JFrame {
 			txtPassword2.setBounds(375, 275, 168, 31);
 		}
 		return txtPassword2;
+	}
+	private JRadioButton getRdbtnPremiumUser() {
+		if (rdbtnPremiumUser == null) {
+			rdbtnPremiumUser = new JRadioButton("Premium user");
+			rdbtnPremiumUser.setBounds(631, 195, 127, 25);
+		}
+		return rdbtnPremiumUser;
+	}
+	private JRadioButton getRdbtnRegularUser() {
+		if (rdbtnRegularUser == null) {
+			rdbtnRegularUser = new JRadioButton("Regular user");
+			rdbtnRegularUser.setBounds(631, 239, 127, 25);
+		}
+		return rdbtnRegularUser;
+	}
+	private JButton getBtnSignUp() {
+		if (btnSignUp == null) {
+			btnSignUp = new JButton("Sign up");
+			btnSignUp.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					System.exit(HIDE_ON_CLOSE);
+				}
+			});
+			btnSignUp.setBounds(723, 13, 97, 25);
+		}
+		return btnSignUp;
 	}
 }
