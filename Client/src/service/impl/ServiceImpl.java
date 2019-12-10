@@ -39,12 +39,12 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public String logIn(String username, String password) {
-		return forServer =  "L," + username + "," + password;
+		return forServer =  "L," + username + "," + password + "," + "N";
 	}
 
 	@Override
-	public String registration(Socket socketForCommunication,String username, String password) {
-		return forServer =  "R," + username + "," + password;
+	public String registration(String username, String password, String status) {
+		return forServer =  "R," + username + "," + password + "," + status;
 	}
 
 }

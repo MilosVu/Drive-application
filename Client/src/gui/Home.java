@@ -57,11 +57,7 @@ public class Home extends JFrame {
 									"Are you sure you want to close this window?", "Close Window?", 
 									JOptionPane.YES_NO_OPTION,
 									JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-//								try {
-//									socketForCommunication.close();
-//								} catch (IOException e) {
-//									e.printStackTrace();
-//								}
+								streamToServer.println("***quit***");
 								System.exit(0);
 							}
 						}

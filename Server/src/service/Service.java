@@ -1,7 +1,5 @@
 package service;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.Socket;
 
 import domain.User;
@@ -20,9 +18,9 @@ public interface Service {
 	
 	public void store();
 	
-	public void makeFolder(User user, String folder);
+	public String makeFolder(User user, String folder);
 	
-	public String uploadFile(User user, String fileName, Socket socketForCommunication)throws IOException;
+	public String uploadFile(User user, String fileName, Socket socketForCommunication) throws Exception;
 	
 	public String list(User user, String folder);
 	
@@ -30,14 +28,19 @@ public interface Service {
 	public void shareFile(User user,String file);
 	
 	//access to hole drive except upload function
-	public void shareDrive(User user);
+	public String shareDrive(User user, String userWhoGetsAccess);
 	
 	public String getShareableLink();
 	
-	public String move(User user, String fileFrom, String fileTo) throws Exception;
+	public String move(User user, String fileFrom, String fileTo);
 	
 	public String rename(User user, String fileOld, String fileNew);
 	
 	public String delete(User user, String file);
+
+	public String open(User user, String file);
 	
+	public String back(User user, String file);
+	
+	public String fileForDownloadExists(User user, String file);
 }

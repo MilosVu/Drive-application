@@ -2,6 +2,7 @@ package domain;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.LinkedList;
 
 public class User implements Serializable{
 
@@ -9,7 +10,7 @@ public class User implements Serializable{
 	private String password;
 	private String status;
 	private File file;
-	private File[] sharePermisions;
+	private LinkedList<String> sharePermisions;
 	private int numberOfFiles;
 	
 	public User(String username, String password, String status) {
@@ -18,7 +19,7 @@ public class User implements Serializable{
 		this.password = password;
 		this.status = status;
 		this.numberOfFiles = 0;
-		sharePermisions = null;
+		sharePermisions = new LinkedList<>();
 		this.file = new File("C:\\Users\\Milos\\eclipse-workspace\\Server\\Drive\\" + username);
 	}
 
@@ -46,12 +47,12 @@ public class User implements Serializable{
 		this.file = file;
 	}
 
-	public File[] getSharePermisions() {
+	public LinkedList<String> getSharePermisions() {
 		return sharePermisions;
 	}
 
-	public void setSharePermisions(File[] sharePermisions) {
-		this.sharePermisions = sharePermisions;
+	public void addSharePermisions(String driveName) {
+		sharePermisions.add(driveName);
 	}
 
 	public int getNumberOfFiles() {
@@ -63,7 +64,14 @@ public class User implements Serializable{
 	}
 	
 	
-	
+	@Override
+	public String toString() {
+		String shared = "";
+		for (String string : sharePermisions) {
+			shared += string + " ";
+		}
+		return getUsername() + " " + getPassword() + " " + getStatus() + " " + shared;
+	}
 	
 	
 }

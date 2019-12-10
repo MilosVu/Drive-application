@@ -10,6 +10,6 @@ public interface Service {
 
 	public String logIn(String username, String password);
 
-	public String registration(Socket socketForCommunication, String username, String password);
+	public String registration(String username, String password, String status);
 	
 }

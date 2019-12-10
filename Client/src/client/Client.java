@@ -26,25 +26,9 @@ public class Client implements Runnable{
 			streamToServer = new PrintStream(socketForCommunication.getOutputStream());
 			streamFromServer = new BufferedReader(new InputStreamReader(socketForCommunication.getInputStream()));
 			
-//			byte[] bafer = new byte[1024];
-//			OutputStream streamToServerByte = socketForCommunication.getOutputStream();
-//			streamToServerByte.write(1);
-//			RandomAccessFile randomAccessFile = new RandomAccessFile(
-//					"C:\\Users\\Milos\\eclipse-workspace\\Client\\wtf.txt", "r");
-//			int n;
-//			while(true) {
-//				n = randomAccessFile.read(bafer);
-//				if(n == -1)
-//					break;
-//				streamToServerByte.write(bafer,0,n);
-//			}
-//			
-//			randomAccessFile.close();
-//			
-			
 			
 			new Thread(new Client()).start();
-			System.out.println("Zatvaram konekciju");
+			System.out.println("Connected");
 //			socketForCommunication.close();
 		} catch (UnknownHostException e) {
 			System.out.println("Server nije podignut...");
@@ -61,7 +45,6 @@ public class Client implements Runnable{
 		try {
 			Home frame = new Home(socketForCommunication, streamFromServer, streamToServer);
 			frame.setVisible(true);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

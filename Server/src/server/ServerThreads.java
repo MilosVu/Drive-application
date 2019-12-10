@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.RandomAccessFile;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -44,15 +45,12 @@ public class ServerThreads extends Thread{
 			streamFromClient = new BufferedReader(new InputStreamReader(socketForCommunication.getInputStream()));
 			streamToClient = new PrintStream(socketForCommunication.getOutputStream());
 			
-			
-			serviceImpl.load();
-			
 			while(!log) {
 				command = streamFromClient.readLine();
 				textArray = command.split(",");
 				username = textArray[1];
 				password = textArray[2];
-				status = textArray[0];
+				status = textArray[3];
 				if(textArray[0].equals("L")) {
 					user = serviceImpl.logIn(username, password);
 					if(user != null) {
@@ -72,14 +70,16 @@ public class ServerThreads extends Thread{
 			while(true) {
 				command = streamFromClient.readLine();
 				parameters = streamFromClient.readLine();
+				System.out.println("Command: " + command);
+				System.out.println("Parameters: " + parameters);
 				response =  serviceImpl.answerGenerator(user, command, parameters, socketForCommunication);
-				System.out.println("Response: " + response);
+				System.out.println("Response:" + response);
 				streamToClient.println(response);
+				
 			}
 			
 		} catch (Exception e) {
-			
-			e.printStackTrace();
+			System.out.println("User left");
 		}
 	}
 }
